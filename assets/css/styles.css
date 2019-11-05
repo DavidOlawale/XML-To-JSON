@@ -8,3 +8,11 @@
   color: white;
 }
 
+.tab-pane {
+  padding-left: 20px;
+}
+textarea {
+  padding: 10px;
+  border: 1px solid #3a75c4;
+  border-radius: 3px;
+}
