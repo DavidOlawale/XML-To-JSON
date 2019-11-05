@@ -8,8 +8,12 @@ let fileJsonField = document.getElementById('file-json-field');
 rawConvertBtn.onclick = function() {
     this.textContent = 'processing';
 	rawLoad.classList = 'm-2 fa fa-cog fa-spin fa-lg';
-	let xmlData = document.getElementById('xml-field').value;
-	rawJsonField.value = xmlData;
+	let xmlString = document.getElementById('xml-field').value;
+	let parser = new DOMParser();
+	let xmlNode = parser.parseFromString(xmlString, 'text/xml');
+	rawJsonField.value = JSON.stringify(convert(xmlNode));
+
+	//Finished
 	this.textContent = 'Processed';
 	rawLoad.classList = 'm-2 fa fa-pass';
 };
@@ -18,3 +22,33 @@ fileConvertBtn.onclick = function() {
     this.textContent = 'processing';
 	fileLoad.classList = 'm-2 fa fa-cog fa-spin fa-lg';
 };
+
+function convert(xmlNode){
+	let children = xmlNode.childNodes; 
+	let jsonData = {};
+	for (let i = 0; i < children.length; i++){
+		const child = children[i];
+		if (child.nodeType == 3) {
+			//check if it contains only white space
+			if (child.nodeValue.trim() == '') {}
+			else{
+				jsonData[child.nodeName] = child.nodeValue;
+				log('text', child.nodeName)
+			}
+		}
+		if (child.nodeType == 1) {
+			if (child.childNodes.length == 1 && child.childNodes[0].nodeType == 3) {
+				jsonData[child.nodeName] = child.childNodes[0].nodeValue;
+			}
+			else{
+				jsonData[child.nodeName] = convert(child);
+			}
+		}
+	}
+	return jsonData;
+}
+
+
+
+
+var log = console.log;
