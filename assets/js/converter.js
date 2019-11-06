@@ -24,7 +24,19 @@ fileConvertBtn.onclick = function() {
 };
 
 function convert(xmlNode){
-	let children = xmlNode.childNodes; 
+	let children = xmlNode.childNodes;
+	let elementChildren = xmlNode.children;
+	if (elementChildren.length > 1 && elementChildren[0].nodeName == elementChildren[1].nodeName) {
+		jsonData = processArray(elementChildren)
+	}
+	else{
+		jsonData = processObject(children);
+	}
+
+	return jsonData;
+}
+
+function processObject(children){
 	let jsonData = {};
 	for (let i = 0; i < children.length; i++){
 		const child = children[i];
@@ -33,7 +45,6 @@ function convert(xmlNode){
 			if (child.nodeValue.trim() == '') {}
 			else{
 				jsonData[child.nodeName] = child.nodeValue;
-				log('text', child.nodeName)
 			}
 		}
 		if (child.nodeType == 1) {
@@ -48,7 +59,11 @@ function convert(xmlNode){
 	return jsonData;
 }
 
-
-
-
-var log = console.log;
+function processArray(children){
+	let jsonArray = [];
+	for (let i = 0; i < children.length; i++){
+		const child = children[i];
+		jsonArray.push(convert(child));
+	}
+	return jsonArray;
+}
