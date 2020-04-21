@@ -15,14 +15,14 @@
         <h1 class="text-center white">File Converter</h1>
     </div>
     <div>
-        <div>
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Raw Data</a></li>
-                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">From File</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane active p-3" role="tabpanel" id="tab-1">
-                    <div class="p-4">
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1">Raw Data</a></li>
+            <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#tab-2">From File</a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active p-3" role="tabpanel" id="tab-1">
+                <div class="d-flex flex-column mt-4 mb-4">
+                    <div class="m-auto">
                         <textarea id="xml-field" rows="20" cols="50" placeholder="XML data here"></textarea>
                         <div class="m-3">
                             <button class="btn btn-primary" id="raw-convert-btn" type="button">Convert</button>
@@ -31,16 +31,18 @@
                         <textarea id="raw-json-field" rows="20" cols="50" placeholder="JSON result here"></textarea>
                     </div>
                 </div>
-                <div class="tab-pane" role="tabpanel" id="tab-2">
-                    <div class="m-2">
-                        <input type="file" name="data" accept="text/xml">
-                        <div class="m-3">
-                            <button class="btn btn-primary" id="file-convert-btn" type="button">Convert</button>
-                            <span class="m-2" id="file-load"></span>
+            </div>
+            <div class="tab-pane" role="tabpanel" id="tab-2">
+                    <div class="d-flex flex-column mt-4 mb-4">
+                        <div class="m-auto">
+                            <input type="file" name="data" accept="text/xml">
+                            <div class="m-3">
+                                <button class="btn btn-primary" id="file-convert-btn" type="button">Convert</button>
+                                <span class="m-2" id="file-load"></span>
+                            </div>
+                            <textarea id="file-json-field" class="d-block" rows="20" cols="50" placeholder="JSON result here"></textarea>
                         </div>
-                        <textarea id="file-json-field" class="d-block" rows="20" cols="50" placeholder="JSON result here"></textarea>
                     </div>
-                </div>
             </div>
         </div>
     </div>
